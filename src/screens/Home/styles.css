@@ -1,0 +1,22 @@
+.initial-home-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  background: linear-gradient(90deg, #43E97B 0%, #38F9D7 100%);
+}
+
+.btn-start{
+  border: none;
+  text-decoration: none;
+  background: #FF3D71;
+  border-radius: 42px;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 18px;
+}
