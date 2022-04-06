@@ -1,4 +1,4 @@
-.avatar {
+.slot {
   /* Center the content */
   display: inline-block;
   vertical-align: middle;
@@ -11,11 +11,13 @@
 
   /* Rounded border */
   border-radius: 50%;
-  height: 48px;
-  width: 48px;
+  height: 53px;
+  width: 53px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-.avatar__letters {
+.avatar__slot {
   /* Center the content */
   left: 50%;
   position: absolute;

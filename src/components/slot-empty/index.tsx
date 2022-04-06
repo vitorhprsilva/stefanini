@@ -10,8 +10,8 @@ type slotEmptyProps = {
 
 export const SlotEmpty = ({children, color, borderColor}: slotEmptyProps) => {
   return (
-    <div className="avatar" style={{backgroundColor: `${color}`, borderColor: `${borderColor}`}}>
-      <div className="avatar__letters">
+    <div className="slot" style={{backgroundColor: `${color}`, borderColor: `${borderColor}`}}>
+      <div className="avatar__slot">
         {children}
       </div>
   </div>

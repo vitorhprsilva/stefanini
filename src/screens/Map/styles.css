@@ -12,3 +12,11 @@
   -o-background-size: cover;
   background-size: cover;
 }
+
+.slots-pokemon{
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 20vw;
+  height: 80%;
+}
