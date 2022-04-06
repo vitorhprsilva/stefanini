@@ -7,7 +7,6 @@ import ImageBulbasaur from '../../assets/imageBulbasaur.png'
 import { Pokemon, defaultPokemon } from '../../domain'
 
 import './styles.css'
-
 export const MapPokemon = () => {
 
   
