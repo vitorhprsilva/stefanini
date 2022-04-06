@@ -5,12 +5,27 @@ import IconAnswer from '../../assets/IconAnswer.svg'
 import IconAdd from '../../assets/IconAdd.svg'
 import ImageBulbasaur from '../../assets/imageBulbasaur.png'
 
-import { Pokemon, defaultPokemon, bulbasaurPokemon } from '../../domain'
+import { Pokemon } from '../../domain'
+
+import {ModalAddPokemon} from '../../components/Add-pokemon'
 
 import './styles.css'
 export const MapPokemon = () => {
 
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [showModalAddPokemon, setShowModalAddPokemon] = useState<boolean>(false);
+
+  let bulbasaur: Pokemon = {
+    id: 0,
+    name: 'Bulbasaur',
+    hp: 45,
+    height: 0.7,
+    weight: 6.9,
+  }
+
+  const handleModal = () => {
+    setShowModalAddPokemon(!showModalAddPokemon);
+  }
 
   return (
     <div className='map-pokemon'>
@@ -20,7 +35,7 @@ export const MapPokemon = () => {
           
           (
             <div>
-              <SlotEmpty color='#00D68F' borderColor='#004A45'>
+              <SlotEmpty onPress={()=>{}} color='#00D68F' borderColor='#004A45'>
                 <img src={IconAnswer} alt='icon answer' />
               </SlotEmpty>
             </div>
@@ -31,7 +46,7 @@ export const MapPokemon = () => {
           (pokemons?.map((pokemon) => {
             return (
               <div key={pokemon.name}>
-                <SlotEmpty color='#fff' borderColor='#00D68F'>
+                <SlotEmpty onPress={()=>{}} color='#fff' borderColor='#00D68F'>
                   {<img src={ImageBulbasaur} alt='pokemon bulbasaur' style={{height: '9vh'}} />}
                 </SlotEmpty>
               </div>
@@ -40,13 +55,15 @@ export const MapPokemon = () => {
         }
 
         <div>
-          <SlotEmpty color='#FF3D71' borderColor='#DB2C66'>
+          <SlotEmpty onPress={handleModal} color='#FF3D71' borderColor='#DB2C66'>
             <img src={IconAdd} alt='icon add' />
           </SlotEmpty>
         </div>
       </div>
 
-        <button onClick={() => setPokemons([bulbasaurPokemon, ...pokemons])}>Add Pokemon</button>
+      <ModalAddPokemon show={showModalAddPokemon} onClose={handleModal} />
+
+        <button onClick={() => setPokemons([bulbasaur, ...pokemons])}>Add Pokemon</button>
         <button onClick={() => console.log(pokemons)}>ver lista</button>
         
     </div>

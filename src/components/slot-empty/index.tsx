@@ -6,14 +6,16 @@ type slotEmptyProps = {
   children: React.ReactNode
   color: string
   borderColor: string
+  onPress: () => void
+  style?: React.CSSProperties
 }
 
-export const SlotEmpty = ({children, color, borderColor}: slotEmptyProps) => {
+export const SlotEmpty = ({children, color, borderColor, onPress, style}: slotEmptyProps) => {
   return (
-    <div className="slot" style={{backgroundColor: `${color}`, borderColor: `${borderColor}`}}>
+    <button onClick={onPress} className="slot" style={{backgroundColor: `${color}`, borderColor: `${borderColor}`, ...style}}>
       <div className="avatar__slot">
         {children}
       </div>
-  </div>
+    </button>
   )
 }

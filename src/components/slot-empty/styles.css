@@ -1,15 +1,11 @@
 .slot {
-  /* Center the content */
   display: inline-block;
   vertical-align: middle;
 
-  /* Used to position the content */
   position: relative;
 
-  /* Colors */
   border: 4px solid;
 
-  /* Rounded border */
   border-radius: 50%;
   height: 53px;
   width: 53px;
@@ -18,7 +14,6 @@
 }
 
 .avatar__slot {
-  /* Center the content */
   left: 50%;
   position: absolute;
   top: 50%;
