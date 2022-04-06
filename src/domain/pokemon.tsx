@@ -1,7 +1,7 @@
 export interface Pokemon {
   id: string
   name: string
-  hp: string
+  hp: number
   height: number
   weight: number
 }
@@ -9,7 +9,7 @@ export interface Pokemon {
 export const defaultPokemon: Pokemon = {
   id: '',
   name: '',
-  hp: '',
+  hp: 0,
   height: 0,
   weight: 0
 }
