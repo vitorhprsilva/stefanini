@@ -2,6 +2,7 @@ import React, {useMemo, useState, useCallback} from 'react'
 import { SlotEmpty } from '../../components/slot-empty'
 
 import IconAnswer from '../../assets/IconAnswer.svg'
+import IconAdd from '../../assets/IconAdd.svg'
 import ImageBulbasaur from '../../assets/imageBulbasaur.png'
 
 import { Pokemon, defaultPokemon, bulbasaurPokemon } from '../../domain'
@@ -37,6 +38,12 @@ export const MapPokemon = () => {
             )
           }))
         }
+
+        <div>
+          <SlotEmpty color='#FF3D71' borderColor='#DB2C66'>
+            <img src={IconAdd} alt='icon add' />
+          </SlotEmpty>
+        </div>
       </div>
 
         <button onClick={() => setPokemons([bulbasaurPokemon, ...pokemons])}>Add Pokemon</button>
