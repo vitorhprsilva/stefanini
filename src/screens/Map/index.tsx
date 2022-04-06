@@ -21,6 +21,14 @@ export const MapPokemon = () => {
     hp: 45,
     height: 0.7,
     weight: 6.9,
+    types: [{name: 'PLANTA'}, {name: 'VENENO'}],
+    statistics: {
+      Defense: 92,
+      Attack: 92,
+      SpecialDefense: 121,
+      SpecialAttack: 121,
+      Speed: 85
+    }
   }
 
   const handleModal = () => {
