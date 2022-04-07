@@ -9,13 +9,14 @@ import ErrorBallon from '../../assets/BallonError.svg'
 
 import { Pokemon, defaultPokemon } from '../../domain'
 
-import {ModalAddPokemon, ModalDataPokemon, SlotEmpty} from '../../components'
+import {ModalAddPokemon, ModalDataPokemon, SlotEmpty, ModalCapturaPokemon} from '../../components'
 
 import './styles.css'
 export const MapPokemon = () => {
 
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [showModalAddPokemon, setShowModalAddPokemon] = useState<boolean>(false);
+  const [showModalCapturePokemon, setShowModalCapturePokemon] = useState<boolean>(false);
   const [showModalDataPokemon, setShowModalDataPokemon] = useState<boolean>(false);
   const [pokemonSelected, setPokemonSelected] = useState<Pokemon>(defaultPokemon);
   const [index, setIndex] = useState<number>(9999);
@@ -41,10 +42,11 @@ export const MapPokemon = () => {
   const action = () => {
     if(pokemons.length<=6){
       setTypeAction('search')
+      setPokemonSelected(bulbasaur)
       setTimeout(() => {
-        addPokemon()
-        setTypeAction('add')
-      }, 1000);
+        setShowModalCapturePokemon(true)
+        addPokemon(bulbasaur)
+      }, 500);
       return
     }
     if(pokemons.length>6){
@@ -58,15 +60,22 @@ export const MapPokemon = () => {
     handleCloseModal()
   }
   
-  const addPokemon = () => {
-    bulbasaur.id = pokemons.length+1;
-    setPokemons([bulbasaur, ...pokemons])
+  const addPokemon = (pokemon: Pokemon) => {
+    pokemon.id = pokemons.length+1;
+    setIndex(1)
+    setPokemons([pokemon, ...pokemons])
+    setTypeAction('add')
+    handleCloseModal()
   }
+
 
   const handleCloseModal = () => {
     setIndex(9999)
     if(showModalAddPokemon) {
       return setShowModalAddPokemon(!showModalAddPokemon);
+    }
+    if(showModalCapturePokemon) {
+      return setShowModalCapturePokemon(!showModalCapturePokemon);
     }
     return setShowModalDataPokemon(!showModalDataPokemon);
   }
@@ -75,6 +84,9 @@ export const MapPokemon = () => {
     setIndex(1)
     if(whoModal === 'add') {
       return setShowModalAddPokemon(!showModalAddPokemon);
+    }
+    if(whoModal === 'search') {
+      return setShowModalCapturePokemon(!showModalCapturePokemon);
     }
     return setShowModalDataPokemon(!showModalDataPokemon);
   }
@@ -113,20 +125,19 @@ export const MapPokemon = () => {
         </div>
       </div>
 
+      <ModalCapturaPokemon show={showModalCapturePokemon} pokemon={bulbasaur} onClose={handleCloseModal} onConfirm={addPokemon} />
       <ModalAddPokemon show={showModalAddPokemon} onClose={handleCloseModal} />
       <ModalDataPokemon show={showModalDataPokemon} onClose={handleCloseModal} pokemon={pokemonSelected} removePokemon={removePokemon} />
 
-        <button onClick={action} className='btn-ash' style={{zIndex: `${index}`}}>
-          {typeAction === 'add' ? 
-            (<img src={SearchBallon} alt='ballon' className='ash-ballon-search'  />) 
-            : null || 
-              (typeAction === 'search' ? 
-                (<img src={LoadingBallon} alt='ballon' />) : 
-                (<img src={ErrorBallon} alt='ballon' className='ash-ballon-search' />))}
-          {/* <img src={SearchBallon} alt='ash' className='ash-ballon-search' /> */}
-          <img src={ImageAsh} alt='ash' className='ash-image' />
-        </button>
-        
+      <button onClick={action} className='btn-ash' style={{zIndex: `${index}`}}>
+        {typeAction === 'add' ? 
+          (<img src={SearchBallon} alt='ballon' className='ash-ballon-search'  />) 
+          : null || 
+          (typeAction === 'search' ? 
+          (<img src={LoadingBallon} alt='ballon' />) : 
+          (<img src={ErrorBallon} alt='ballon' className='ash-ballon-search' />))}
+        <img src={ImageAsh} alt='ash' className='ash-image' />
+      </button>
     </div>
   )
 }
