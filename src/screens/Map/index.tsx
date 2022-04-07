@@ -2,6 +2,10 @@ import React, {useState} from 'react'
 import IconAnswer from '../../assets/IconAnswer.svg'
 import IconAdd from '../../assets/IconAdd.svg'
 import ImageBulbasaur from '../../assets/imageBulbasaur.png'
+import ImageAsh from '../../assets/Front.svg'
+import SearchBallon from '../../assets/SearchBallon.svg'
+import LoadingBallon from '../../assets/BallonLoading.svg'
+import ErrorBallon from '../../assets/BallonError.svg'
 
 import { Pokemon, defaultPokemon } from '../../domain'
 
@@ -14,6 +18,8 @@ export const MapPokemon = () => {
   const [showModalAddPokemon, setShowModalAddPokemon] = useState<boolean>(false);
   const [showModalDataPokemon, setShowModalDataPokemon] = useState<boolean>(false);
   const [pokemonSelected, setPokemonSelected] = useState<Pokemon>(defaultPokemon);
+  const [index, setIndex] = useState<number>(9999);
+  const [typeAction, setTypeAction] = useState<string>('add');
 
   let bulbasaur: Pokemon = {
     id: 0,
@@ -31,6 +37,21 @@ export const MapPokemon = () => {
       Speed: 85
     }
   }
+
+  const action = () => {
+    if(pokemons.length<=6){
+      setTypeAction('search')
+      setTimeout(() => {
+        addPokemon()
+        setTypeAction('add')
+      }, 1000);
+      return
+    }
+    if(pokemons.length>6){
+      setTypeAction('error')
+      return
+    }
+  }
   
   const removePokemon = (pokemon: Pokemon) => {
     setPokemons(pokemons.filter(p => p.id !== pokemon.id))
@@ -43,6 +64,7 @@ export const MapPokemon = () => {
   }
 
   const handleCloseModal = () => {
+    setIndex(9999)
     if(showModalAddPokemon) {
       return setShowModalAddPokemon(!showModalAddPokemon);
     }
@@ -50,6 +72,7 @@ export const MapPokemon = () => {
   }
 
   const handleOpenModal = (whoModal: string) => {
+    setIndex(1)
     if(whoModal === 'add') {
       return setShowModalAddPokemon(!showModalAddPokemon);
     }
@@ -93,8 +116,16 @@ export const MapPokemon = () => {
       <ModalAddPokemon show={showModalAddPokemon} onClose={handleCloseModal} />
       <ModalDataPokemon show={showModalDataPokemon} onClose={handleCloseModal} pokemon={pokemonSelected} removePokemon={removePokemon} />
 
-        <button onClick={addPokemon}>Add Pokemon</button>
-        <button onClick={() => console.log(pokemons)}>ver lista</button>
+        <button onClick={action} className='btn-ash' style={{zIndex: `${index}`}}>
+          {typeAction === 'add' ? 
+            (<img src={SearchBallon} alt='ballon' className='ash-ballon-search'  />) 
+            : null || 
+              (typeAction === 'search' ? 
+                (<img src={LoadingBallon} alt='ballon' />) : 
+                (<img src={ErrorBallon} alt='ballon' className='ash-ballon-search' />))}
+          {/* <img src={SearchBallon} alt='ash' className='ash-ballon-search' /> */}
+          <img src={ImageAsh} alt='ash' className='ash-image' />
+        </button>
         
     </div>
   )
