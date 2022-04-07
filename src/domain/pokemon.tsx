@@ -1,5 +1,6 @@
 export interface Type {
   name: string
+  color: string
 }
 
 export interface Statistic {
@@ -17,6 +18,7 @@ export interface Pokemon {
   height: number
   weight: number
   types: Type[]
+  habilities: string[]
   statistics: Statistic
 }
 
@@ -26,7 +28,8 @@ export const defaultPokemon: Pokemon = {
   hp: 0,
   height: 0,
   weight: 0,
-  types: [{name: ''}, {name: ''}],
+  types: [{name: '', color: ''}, {name: '', color: ''}],
+  habilities: [],
   statistics: {
     Defense: 0,
     Attack: 0,
